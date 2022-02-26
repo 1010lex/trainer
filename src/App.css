@@ -1,38 +1,37 @@
-.App {
-  text-align: center;
+.app-layout--main {
+  width: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.form-group-exercise,
+.form-group-interval {
+  width: 100%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.form-group-exercise .form-group-exercise--label,
+.form-group-interval .form-group-interval--label {
+  margin: 0;
+  justify-content: space-between;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.form-group-exercise .form-group-exercise--label .MuiFormControlLabel-label,
+.form-group-interval .form-group-interval--label .MuiFormControlLabel-label {
+  margin-left: 8px;
 }
 
-.App-link {
-  color: #61dafb;
+.form-group-interval .form-group-interval--button-group {
+  margin: 3px 9px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* debugging */
+
+/*
+
+.form-group-exercise {
+  background-color: red;
 }
+
+.form-group-interval {
+  background-color: green;
+}
+
+*/
