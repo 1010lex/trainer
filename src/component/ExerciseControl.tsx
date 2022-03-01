@@ -1,30 +1,36 @@
 import React, { ChangeEvent, Component, ReactNode } from 'react'
+import isNil from 'lodash/isNil'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import FormGroup from '@mui/material/FormGroup'
 import Switch from '@mui/material/Switch'
 import Exercise from '../model/Exercise'
 
 type ExerciseControlProps = {
+  events: {
+    exerciseEnableTriggered: (id: string) => void
+    exerciseDisableTriggered: (id: string) => void
+  }
   exercises: Exercise[]
 }
 
-type ExerciseControlState = {
-  exerciseStates: { [key: string]: boolean }
-}
+type ExerciseControlState = {}
 
 class ExerciseControl extends Component<ExerciseControlProps, ExerciseControlState> {
   constructor(props: ExerciseControlProps) {
     super(props)
-    this.state = {
-      exerciseStates: props.exercises
-        .reduce((accumulator: ExerciseControlState['exerciseStates'], exercise: Exercise) => {
-          accumulator[exercise.id] = exercise.defaultEnabled
-          return accumulator
-        }, {})
-    }
 
-    this.isEnabledExercise = this.isEnabledExercise.bind(this)
     this.changeExerciseState = this.changeExerciseState.bind(this)
+  }
+
+  changeExerciseState(event: ChangeEvent<HTMLInputElement>): void {
+    const exerciseId = event.target.value
+    const exercise = this.props.exercises.find(exercise => exercise.id === exerciseId)
+    if (isNil(exercise)) {
+      return
+    }
+    exercise.enabled
+      ? this.props.events.exerciseDisableTriggered(exerciseId)
+      : this.props.events.exerciseEnableTriggered(exerciseId)
   }
 
   render(): ReactNode {
@@ -41,7 +47,7 @@ class ExerciseControl extends Component<ExerciseControlProps, ExerciseControlSta
                 control={
                   <Switch
                     className='form-group-exercise--switch'
-                    checked={this.isEnabledExercise(exercise)}
+                    checked={exercise.enabled}
                     value={exercise.id}
                     onChange={this.changeExerciseState}
                   />
@@ -54,17 +60,7 @@ class ExerciseControl extends Component<ExerciseControlProps, ExerciseControlSta
       </FormGroup>
     )
   }
-
-  isEnabledExercise(exercise: Exercise): boolean {
-    return this.state.exerciseStates[exercise.id]
-  }
-
-  changeExerciseState(event: ChangeEvent<HTMLInputElement>): void {
-    const exerciseId = event.target.value
-    const nextState = { ...this.state }
-    nextState.exerciseStates[exerciseId] = !nextState.exerciseStates[exerciseId]
-    this.setState(nextState)
-  }
 }
 
-export default ExerciseControl
+export type { ExerciseControlProps }
+export { ExerciseControl }

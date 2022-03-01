@@ -1,7 +1,7 @@
 type Exercise = {
   id: string
   name: string
-  defaultEnabled: boolean
+  enabled: boolean
 }
 
 export default Exercise
