@@ -1,9 +1,9 @@
 import React, { Component, ReactNode } from 'react'
 import Stack from '@mui/material/Stack'
 import Exercise from '../model/Exercise'
-import ExerciseControlGroup from '../component/ExerciseControlGroup'
-import IntervalButtonGroup from '../component/IntervalButtonGroup'
-import StartStopButtonGroup from '../component/StartStopButtonGroup'
+import ExerciseControl from '../component/ExerciseControl'
+import IntervalControl from '../component/IntervalControl'
+import StartStopControl from '../component/StartStopControl'
 import './Application.css'
 
 class Application extends Component {
@@ -23,13 +23,15 @@ class Application extends Component {
     { id: '70155489-85d3-42e4-847b-99cc85241f6c', name: 'Pivot', defaultEnabled: true },
   ]
 
+  private defaultDuration: number = 5000
+
   render(): ReactNode {
     return (
       <Stack className="app-layout--wrapper" direction={'row'} alignItems='center' justifyContent={'center'}>
         <Stack className="app-layout--main" direction={'column'} alignItems='center' justifyContent={'center'}>
-          <ExerciseControlGroup exercises={this.exercises} />
-          <IntervalButtonGroup defaultDuration={5000} />
-          <StartStopButtonGroup />
+          <ExerciseControl exercises={this.exercises} />
+          <IntervalControl defaultDuration={this.defaultDuration} />
+          <StartStopControl />
         </Stack>
       </Stack>
     )

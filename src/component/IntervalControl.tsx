@@ -6,20 +6,20 @@ import FormGroup from '@mui/material/FormGroup'
 import Add from '@mui/icons-material/Add'
 import Remove from '@mui/icons-material/Remove'
 
-type IntervalButtonGroupProps = {
+type IntervalControlProps = {
   defaultDuration: number
 }
 
-type IntervalButtonGroupState = {
+type IntervalControlState = {
   duration: number
 }
 
-class IntervalButtonGroup extends Component<IntervalButtonGroupProps, IntervalButtonGroupState> {
+class IntervalControl extends Component<IntervalControlProps, IntervalControlState> {
   private _durationMin: number = 1000
   private _durationMax: number = 10000
   private _durationStep: number = 1000
 
-  constructor(props: IntervalButtonGroupProps) {
+  constructor(props: IntervalControlProps) {
     super(props)
     this.state = {
       duration: props.defaultDuration
@@ -66,4 +66,4 @@ class IntervalButtonGroup extends Component<IntervalButtonGroupProps, IntervalBu
   }
 }
 
-export default IntervalButtonGroup
+export default IntervalControl

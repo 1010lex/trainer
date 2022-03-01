@@ -4,20 +4,20 @@ import FormGroup from '@mui/material/FormGroup'
 import Switch from '@mui/material/Switch'
 import Exercise from '../model/Exercise'
 
-type ExerciseControlGroupProps = {
+type ExerciseControlProps = {
   exercises: Exercise[]
 }
 
-type ExerciseControlGroupState = {
+type ExerciseControlState = {
   exerciseStates: { [key: string]: boolean }
 }
 
-class ExerciseControlGroup extends Component<ExerciseControlGroupProps, ExerciseControlGroupState> {
-  constructor(props: ExerciseControlGroupProps) {
+class ExerciseControl extends Component<ExerciseControlProps, ExerciseControlState> {
+  constructor(props: ExerciseControlProps) {
     super(props)
     this.state = {
       exerciseStates: props.exercises
-        .reduce((accumulator: ExerciseControlGroupState['exerciseStates'], exercise: Exercise) => {
+        .reduce((accumulator: ExerciseControlState['exerciseStates'], exercise: Exercise) => {
           accumulator[exercise.id] = exercise.defaultEnabled
           return accumulator
         }, {})
@@ -67,4 +67,4 @@ class ExerciseControlGroup extends Component<ExerciseControlGroupProps, Exercise
   }
 }
 
-export default ExerciseControlGroup
+export default ExerciseControl

@@ -2,14 +2,14 @@ import React, { Component, ReactNode } from 'react'
 import Button from '@mui/material/Button'
 import ButtonGroup from '@mui/material/ButtonGroup'
 
-type StartStopButtonGroupProps = {}
+type StartStopButtonControlProps = {}
 
-type StartStopButtonGroupState = {
+type StartStopButtonControlState = {
   started: boolean
 }
 
-class StartStopButtonGroup extends Component<StartStopButtonGroupProps, StartStopButtonGroupState> {
-  constructor(props: StartStopButtonGroupProps) {
+class StartStopButtonControl extends Component<StartStopButtonControlProps, StartStopButtonControlState> {
+  constructor(props: StartStopButtonControlProps) {
     super(props)
     this.state = {
       started: false,
@@ -40,4 +40,4 @@ class StartStopButtonGroup extends Component<StartStopButtonGroupProps, StartSto
   }
 }
 
-export default StartStopButtonGroup
+export default StartStopButtonControl
