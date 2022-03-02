@@ -1,9 +1,8 @@
 import React, { ChangeEvent, Component, ReactNode } from 'react'
-import isNil from 'lodash/isNil'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import FormGroup from '@mui/material/FormGroup'
 import Switch from '@mui/material/Switch'
-import Exercise from '../model/Exercise'
+import { Exercise } from '../model/Exercise'
 
 type ExerciseControlProps = {
   events: {
@@ -23,14 +22,14 @@ class ExerciseControl extends Component<ExerciseControlProps, ExerciseControlSta
   }
 
   changeExerciseState(event: ChangeEvent<HTMLInputElement>): void {
-    const exerciseId = event.target.value
-    const exercise = this.props.exercises.find(exercise => exercise.id === exerciseId)
-    if (isNil(exercise)) {
-      return
-    }
-    exercise.enabled
-      ? this.props.events.exerciseDisableTriggered(exerciseId)
-      : this.props.events.exerciseEnableTriggered(exerciseId)
+    const {
+      value: exerciseId,
+      checked: enableTriggered,
+    } = event.target
+
+    enableTriggered
+      ? this.props.events.exerciseEnableTriggered(exerciseId)
+      : this.props.events.exerciseDisableTriggered(exerciseId)
   }
 
   render(): ReactNode {
@@ -52,7 +51,7 @@ class ExerciseControl extends Component<ExerciseControlProps, ExerciseControlSta
                     onChange={this.changeExerciseState}
                   />
                 }
-                label={exercise.name}
+                label={exercise.label}
               />
             )
           })

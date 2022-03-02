@@ -1,7 +1,8 @@
-type Exercise = {
+interface Exercise {
   id: string
-  name: string
+  label: string
+  phrase: string | (() => string)
   enabled: boolean
 }
 
-export default Exercise
+export type { Exercise }
