@@ -1,3 +1,4 @@
+import cloneDeep from 'lodash/cloneDeep'
 import isFunction from 'lodash/isFunction'
 import isNil from 'lodash/isNil'
 import random from 'lodash/random'
@@ -20,8 +21,8 @@ class Training {
   private _timer: ReturnType<typeof setInterval> | null
 
   constructor(options: ConstructorOptions) {
-    this._exercises = options.exercises
-    this._intervalConfiguration = options.intervalConfiguration
+    this._exercises = cloneDeep(options.exercises)
+    this._intervalConfiguration = cloneDeep(options.intervalConfiguration)
     this._interval = options.intervalConfiguration.default
     this._timer = null
   }
@@ -50,6 +51,16 @@ class Training {
     }
     this.stop()
     this.start()
+  }
+
+  disableExercise(exerciseId: string): void {
+    const exercise = this.getExerciseById(exerciseId)
+    exercise.enabled = false
+  }
+
+  enableExercise(exerciseId: string): void {
+    const exercise = this.getExerciseById(exerciseId)
+    exercise.enabled = true
   }
 
   decreaseInterval(): number {
@@ -92,6 +103,14 @@ class Training {
     speechSynthesis.speak(utterance)
   }
 
+  private getExerciseById(exerciseId: string): Exercise {
+    const exercise = this._exercises.find(exercise => exercise.id === exerciseId)
+    if (isNil(exercise)) {
+      throw new Error('Exercise could not be found')
+    }
+    return exercise
+  }
+
   private anounceRandomEnabledExercise(): void {
     const enabledExercises = this._exercises.filter(exercise => exercise.enabled)
     const randomIndex = random(0, enabledExercises.length - 1, false)
@@ -101,7 +120,7 @@ class Training {
   }
 
   get exercises(): Exercise[] {
-    return this._exercises
+    return cloneDeep(this._exercises)
   }
 
   get interval(): number {

@@ -11,32 +11,30 @@ import './Application.css'
 type ApplicationProps = {}
 
 type ApplicationState = {
-  exercises: { [key: string]: Exercise }
+  exercises: Exercise[]
   interval: number
   started: boolean
 }
 
 class Application extends Component<ApplicationProps, ApplicationState> {
-  private _training = new Training({
-    exercises: configuration.exercises,
-    intervalConfiguration: {
-      default: configuration.interval,
-      min: configuration.intervalMin,
-      max: configuration.intervalMax,
-      step: configuration.intervalStep,
-    }
-  })
+  private _training: Training
 
   constructor(props: ApplicationProps) {
     super(props)
 
+    this._training = new Training({
+      exercises: configuration.exercises,
+      intervalConfiguration: {
+        default: configuration.interval,
+        min: configuration.intervalMin,
+        max: configuration.intervalMax,
+        step: configuration.intervalStep,
+      }
+    })
+
     this.state = {
-      exercises: configuration.exercises
-        .reduce((accumulator: ApplicationState['exercises'], exercise: Exercise) => {
-          accumulator[exercise.id] = exercise
-          return accumulator
-        }, {}),
-      interval: configuration.interval,
+      exercises: this._training.exercises,
+      interval: this._training.interval,
       started: false,
     }
 
@@ -48,18 +46,20 @@ class Application extends Component<ApplicationProps, ApplicationState> {
     this.onStopTriggered = this.onStopTriggered.bind(this)
   }
 
-  onExerciseDisableTriggered(id: string): void {
-    const exercises = { ...this.state.exercises }
-    exercises[id].enabled = false
+  onExerciseDisableTriggered(exerciseId: string): void {
+    this._training.disableExercise(exerciseId)
+    const exercises = this._training.exercises
+
     this.setState({
       ...this.state,
       exercises,
     })
   }
 
-  onExerciseEnableTriggered(id: string): void {
-    const exercises = { ...this.state.exercises }
-    exercises[id].enabled = true
+  onExerciseEnableTriggered(exerciseId: string): void {
+    this._training.enableExercise(exerciseId)
+    const exercises = this._training.exercises
+
     this.setState({
       ...this.state,
       exercises,
@@ -67,32 +67,42 @@ class Application extends Component<ApplicationProps, ApplicationState> {
   }
 
   onDecreaseIntervalTriggered(): void {
+    this._training.decreaseInterval()
+    const interval = this._training.interval
+
     this.setState({
       ...this.state,
-      interval: this._training.decreaseInterval(),
+      interval,
     })
   }
 
   onIncreaseIntervalTriggered(): void {
+    this._training.increaseInterval()
+    const interval = this._training.interval
+
     this.setState({
       ...this.state,
-      interval: this._training.increaseInterval(),
+      interval,
     })
   }
 
   onStartTriggered(): void {
     this._training.start()
+    const started = this._training.isStarted()
+
     this.setState({
       ...this.state,
-      started: this._training.isStarted(),
+      started,
     })
   }
 
   onStopTriggered(): void {
     this._training.stop()
+    const started = this._training.isStarted()
+
     this.setState({
       ...this.state,
-      started: this._training.isStarted(),
+      started,
     })
   }
 
@@ -113,7 +123,7 @@ class Application extends Component<ApplicationProps, ApplicationState> {
     return (
       <Stack className="app-layout--wrapper" direction={'row'} alignItems='center' justifyContent={'center'}>
         <Stack className="app-layout--main" direction={'column'} alignItems='center' justifyContent={'center'}>
-          <ExerciseControl events={exerciseControlEvents} exercises={configuration.exercises} />
+          <ExerciseControl events={exerciseControlEvents} exercises={this.state.exercises} />
           <IntervalControl events={intervalControlEvents} interval={this.state.interval} />
           <StartStopControl events={startStopControlEvents} started={this.state.started} />
         </Stack>

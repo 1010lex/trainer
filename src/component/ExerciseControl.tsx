@@ -6,8 +6,8 @@ import { Exercise } from '../model/Exercise'
 
 type ExerciseControlProps = {
   events: {
-    exerciseEnableTriggered: (id: string) => void
-    exerciseDisableTriggered: (id: string) => void
+    exerciseEnableTriggered: (exerciseId: string) => void
+    exerciseDisableTriggered: (exerciseId: string) => void
   }
   exercises: Exercise[]
 }
