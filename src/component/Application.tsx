@@ -87,6 +87,9 @@ class Application extends Component<ApplicationProps, ApplicationState> {
   }
 
   onStartTriggered(): void {
+    // workaround for ios to initialise speech synthesis on click
+    speechSynthesis.speak(new SpeechSynthesisUtterance())
+
     this._training.start()
     const started = this._training.isStarted()
 
