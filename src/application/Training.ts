@@ -56,31 +56,31 @@ class Training {
   disableExercise(exerciseId: string): void {
     const exercise = this.getExerciseById(exerciseId)
     exercise.enabled = false
+    this.restart()
   }
 
   enableExercise(exerciseId: string): void {
     const exercise = this.getExerciseById(exerciseId)
     exercise.enabled = true
+    this.restart()
   }
 
-  decreaseInterval(): number {
+  decreaseInterval(): void {
     const decreasedInterval = this._interval - this._intervalConfiguration.step
     if (decreasedInterval < this._intervalConfiguration.min) {
-      return this._interval
+      return
     }
     this._interval = decreasedInterval
     this.restart()
-    return this._interval
   }
 
-  increaseInterval(): number {
+  increaseInterval(): void {
     const increasedInterval = this._interval + this._intervalConfiguration.step
     if (increasedInterval > this._intervalConfiguration.max) {
-      return this._interval
+      return
     }
     this._interval = increasedInterval
     this.restart()
-    return this._interval
   }
 
   isStarted(): boolean {
