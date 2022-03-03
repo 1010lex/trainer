@@ -87,7 +87,7 @@ const configuration: Configuration = {
       enabled: true,
     },
   ],
-  interval: 2000,
+  interval: 4000,
   intervalMin: 1000,
   intervalMax: 10000,
   intervalStep: 1000,
