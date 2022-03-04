@@ -30,11 +30,11 @@ class StartStopControl extends Component<StartStopControlProps, StartStopControl
 
   render(): ReactNode {
     return (
-      <ButtonGroup className='form-group-startstop--button-group' variant='contained'>
+      <ButtonGroup className='control-startstop control-startstop--button-group' variant='contained'>
         {
           this.props.started
-            ? <Button color='error' onClick={this.onStopClick}>Stop</Button>
-            : <Button color='success' onClick={this.onStartClick}>Start</Button>
+            ? <Button className='control-startstop--button--stop' color='error' onClick={this.onStopClick}>Stop</Button>
+            : <Button className='control-startstop--button--start' color='success' onClick={this.onStartClick}>Start</Button>
         }
       </ButtonGroup>
     )

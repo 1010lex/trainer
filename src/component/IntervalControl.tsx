@@ -39,10 +39,10 @@ class IntervalControl extends Component<IntervalControlProps, IntervalControlSta
 
   render(): ReactNode {
     return (
-      <FormGroup className='form-group-interval'>
-        <FormControlLabel className='form-group-interval--label' labelPlacement='start' label={this.renderDuration()}
+      <FormGroup className='control-interval'>
+        <FormControlLabel className='control-interval--label' labelPlacement='start' label={this.renderDuration()}
           control={
-            <ButtonGroup className='form-group-interval--button-group' variant='contained'>
+            <ButtonGroup className='control-interval--button-group' variant='contained'>
               <Button onClick={this.onDecreaseIntervalClick}><Remove /></Button>
               <Button onClick={this.onIncreaseIntervalClick}><Add /></Button>
             </ButtonGroup>

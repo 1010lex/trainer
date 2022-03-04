@@ -2,35 +2,60 @@
   width: 100%;
 }
 
-.form-group-exercise,
-.form-group-interval {
+.control-exercise {
   width: 100%;
 }
 
-.form-group-exercise .form-group-exercise--label,
-.form-group-interval .form-group-interval--label {
-  margin: 0;
+.control-exercise .control-exercise--label {
+  margin: 0px;
+  padding: 3px 0px;
   justify-content: space-between;
 }
 
-.form-group-exercise .form-group-exercise--label .MuiFormControlLabel-label,
-.form-group-interval .form-group-interval--label .MuiFormControlLabel-label {
+.control-exercise .control-exercise--label .MuiFormControlLabel-label {
   margin-left: 8px;
 }
 
-.form-group-interval .form-group-interval--button-group {
+.control-exercise .control-exercise--label:nth-child(odd) {
+  background-color: rgb(238, 238, 238);
+}
+
+.control-exercise .control-exercise--label:nth-child(even) {
+  background-color: white;
+}
+
+.control-interval {
+  width: 100%;
+  margin-top: 5px;
+}
+
+.control-interval .control-interval--label {
+  margin: 0px;
+  padding: 3px 0px;
+  justify-content: space-between;
+}
+
+.control-interval .control-interval--label .MuiFormControlLabel-label {
+  margin-left: 8px;
+}
+
+.control-interval .control-interval--button-group {
   margin: 3px 9px;
+}
+
+.control-startstop {
+  margin-top: 20px;
 }
 
 /* debugging */
 
 /*
 
-.form-group-exercise {
+.control-exercise {
   background-color: red;
 }
 
-.form-group-interval {
+.control-interval {
   background-color: green;
 }
 

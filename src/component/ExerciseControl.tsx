@@ -35,17 +35,17 @@ class ExerciseControl extends Component<ExerciseControlProps, ExerciseControlSta
   render(): ReactNode {
     const { exercises } = this.props
     return (
-      <FormGroup className='form-group-exercise'>
+      <FormGroup className='control-exercise'>
         {
           exercises.map((exercise) => {
             return (
               <FormControlLabel
-                className='form-group-exercise--label'
+                className='control-exercise--label'
                 key={exercise.id}
                 labelPlacement='start'
                 control={
                   <Switch
-                    className='form-group-exercise--switch'
+                    className='control-exercise--switch'
                     checked={exercise.enabled}
                     value={exercise.id}
                     onChange={this.changeExerciseState}
