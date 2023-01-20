@@ -4,6 +4,8 @@ Simple application to help during workouts.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+Demo is availabe at [https://1010lex.github.io/trainer](https://1010lex.github.io/trainer)
+
 ## Available Scripts
 
 In the project directory, you can run:
